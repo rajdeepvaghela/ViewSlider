@@ -5,7 +5,7 @@
 
 It is a Horizontal view slider which will snap the middle item, with the scale effect.
 
-![image](https://github.com/rajdeepvaghela/ViewSlider/assets/17750025/320c9e61-58c3-46a1-864e-3794e40c3d73)
+![image](https://github.com/rajdeepvaghela/ViewSlider/assets/17750025/ff610205-d4f7-4edf-a39e-1a73f8526176)
 
 ## Installation
 Add it in your root build.gradle or settings.gradle at the end of repositories:
