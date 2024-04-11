@@ -1,4 +1,4 @@
-package com.rdapps.example
+package com.rdapps.viewsliderexample
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -29,7 +29,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.rdapps.example.ui.theme.ViewSliderTheme
+import com.rdapps.viewsliderexample.ui.theme.ViewSliderTheme
 import com.rdapps.viewslider.ViewSlider
 
 class MainActivity : ComponentActivity() {

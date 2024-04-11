@@ -1,4 +1,4 @@
-package com.rdapps.example.ui.theme
+package com.rdapps.viewsliderexample.ui.theme
 
 import android.app.Activity
 import android.os.Build

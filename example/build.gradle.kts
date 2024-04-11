@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.rdapps.viewslider.example"
+    namespace = "com.rdapps.viewsliderexample"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.rdapps.viewslider.example"
+        applicationId = "com.rdapps.viewsliderexample"
         minSdk = 21
         targetSdk = 34
         versionCode = 1

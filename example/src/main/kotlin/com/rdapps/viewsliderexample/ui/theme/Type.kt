@@ -1,4 +1,4 @@
-package com.rdapps.example.ui.theme
+package com.rdapps.viewsliderexample.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
