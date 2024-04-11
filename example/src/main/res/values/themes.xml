@@ -1,0 +1,4 @@
+<resources>
+
+    <style name="Theme.ViewSlider" parent="Theme.Material3.Dark.NoActionBar" />
+</resources>
