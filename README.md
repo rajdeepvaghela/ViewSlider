@@ -1,4 +1,4 @@
-# ValuePickerSlider
+# View Slider
 [![Release](https://jitpack.io/v/com.github.rajdeepvaghela/ViewSlider.svg)](https://jitpack.io/#com.github.rajdeepvaghela/ViewSlider)
 [![Release](https://img.shields.io/github/v/release/rajdeepvaghela/ViewSlider)](https://github.com/rajdeepvaghela/ViewSlider/releases)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
