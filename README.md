@@ -1,11 +1,11 @@
 # View Slider
-[![Release](https://jitpack.io/v/com.github.rajdeepvaghela/ViewSlider.svg)](https://jitpack.io/#com.github.rajdeepvaghela/ViewSlider)
-[![Release](https://img.shields.io/github/v/release/rajdeepvaghela/ViewSlider)](https://github.com/rajdeepvaghela/ViewSlider/releases)
+[![Release](https://jitpack.io/v/com.github.rajdeepvaghela/ViewSlider.svg)](https://jitpack.io/#com.github.rajdeepvaghela/VerticalStepper)
+[![Release](https://img.shields.io/github/v/release/rajdeepvaghela/VerticalStepper)](https://github.com/rajdeepvaghela/VerticalStepper/releases)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 It is a Horizontal view slider which will snap the middle item, with the scale effect.
 
-![image](https://github.com/rajdeepvaghela/ViewSlider/assets/17750025/ff610205-d4f7-4edf-a39e-1a73f8526176)
+![Screen_recording_20240718_125304-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/dfc81adc-381a-4f32-9907-6de8b589f890)
 
 ## Installation
 Add it in your root build.gradle or settings.gradle at the end of repositories:
@@ -21,45 +21,23 @@ dependencyResolutionManagement {
 Add the dependency
 ```gradle
 dependencies {
-    implementation 'com.github.rajdeepvaghela:ViewSlider:1.0.0'
+    implementation 'com.github.rajdeepvaghela:VerticalStepper:1.0.0'
 }
 ```
 ## Usage
 ```kotlin
-    ViewSlider(
-        items = listOf(
-            Item(Icons.Filled.AccountCircle, "Profile Info", Color(0xFFE57373)),
-            Item(Icons.Filled.ShoppingCart, "Cart", Color(0xFF81C784)),
-            Item(Icons.Filled.Favorite, "Favorites", Color(0xFF64B5F6)),
-            Item(Icons.Filled.Settings, "Settings", Color(0xFFFFD54F))
-        ),
-        scaleDownFactor = 0.4f,
-        itemWidth = 80.dp,
-        selectedItemIndicator = {
-            Icon(
-                imageVector = Icons.Default.ArrowDropDown,
-                tint = it.selectedColor,
-                contentDescription = null
+            val stepData = StepData(
+                id = 1L,
+                stepState = StepState.Visible,
+                title = "Title"
             )
-        },
-        selectedItemLabel = {
-            Text(
-                text = it.name,
-                color = it.selectedColor
+
+            Step(
+                stepData = stepData,
+                onAnimationDone = {
+                    
+                }
             )
-        },
-        onItemSelected = { index, item ->
-            // do action on item selection
-        },
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Image(
-            imageVector = it.icon,
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(it.selectedColor),
-            modifier = Modifier.size(72.dp)
-        )
-    }
 ```
 
 ## License
