@@ -10,19 +10,15 @@ It is a Horizontal view slider which will snap the middle item, with the scale e
 
 ## Installation
 Add it in your root build.gradle or settings.gradle at the end of repositories:
-```gradle
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-      mavenCentral()
-      maven { url 'https://jitpack.io' }
-    }
+```kts
+repositories {
+  mavenCentral()
 }
 ```
 Add the dependency
-```gradle
+```kts
 dependencies {
-    implementation 'com.github.rajdeepvaghela:ViewSlider:1.0.0'
+    implementation("io.github.rajdeepvaghela:viewslider:2.0.0")
 }
 ```
 ## Usage
