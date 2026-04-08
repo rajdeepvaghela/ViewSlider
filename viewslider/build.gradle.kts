@@ -11,8 +11,8 @@ plugins {
     id("maven-publish")
 }
 
-val libGroup = "io.github.rajdeepvaghela.viewslider"
-val libVersion = "2.0.1"
+val libGroup = "io.github.rajdeepvaghela"
+val libVersion = "2.0.0"
 
 kotlin {
 
@@ -45,6 +45,40 @@ kotlin {
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+    }
+}
+
+mavenPublishing {
+    publishToMavenCentral()
+
+    signAllPublications()
+
+    coordinates(libGroup, "viewslider", libVersion)
+
+    pom {
+        name = "View Slider"
+        description = "Center snapable Horizontal view slider"
+        inceptionYear = "2024"
+        url = "https://github.com/rajdeepvaghela/ViewSlider"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "rajdeepvaghela"
+                name = "Rajdeep Vaghela"
+                url = "https://github.com/rajdeepvaghela"
+            }
+        }
+        scm {
+            url = "https://github.com/rajdeepvaghela/ViewSlider"
+            connection = "scm:git:git://github.com/rajdeepvaghela/ViewSlider.git"
+            developerConnection = "scm:git:git://github.com/rajdeepvaghela/ViewSlider.git"
         }
     }
 }
