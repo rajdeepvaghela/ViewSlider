@@ -3,6 +3,8 @@ package com.rdapps.viewslider
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -11,7 +13,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -23,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -31,6 +31,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalDensity
@@ -67,13 +69,50 @@ fun <T> ViewSlider(
         mutableIntStateOf(0)
     }
 
+    val velocityTracker = remember { VelocityTracker() }
+
     BoxWithConstraints(
         modifier = modifier.fillMaxWidth()
-    ) {
-        var sliderHeight by remember {
-            mutableStateOf(0.dp)
-        }
+            .let {
+                when (getPlatform()) {
+                    Platform.Web,
+                    Platform.Desktop -> {
+                        it.pointerInput(snapFlingBehavior) {
+                            detectDragGestures(
+                                onDragEnd = {
+                                    val velocity = velocityTracker.calculateVelocity()
+                                    velocityTracker.resetTracking()
+                                    coroutineScope.launch {
+                                        scrollState.scroll {
+                                            with(snapFlingBehavior) {
+                                                performFling(-velocity.x)
+                                            }
+                                        }
+                                    }
+                                },
+                                onDragCancel = {
+                                    velocityTracker.resetTracking()
+                                    coroutineScope.launch {
+                                        scrollState.scroll {
+                                            with(snapFlingBehavior) {
+                                                performFling(0f)
+                                            }
+                                        }
+                                    }
+                                }
+                            ) { change, dragAmount ->
+                                velocityTracker.addPosition(change.uptimeMillis, change.position)
+                                coroutineScope.launch {
+                                    scrollState.scrollBy(-dragAmount.x)
+                                }
+                            }
+                        }
+                    }
 
+                    else -> it
+                }
+            }
+    ) {
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -91,10 +130,7 @@ fun <T> ViewSlider(
 
             LazyRow(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .onGloballyPositioned {
-                        sliderHeight = density.run { it.size.height.toDp() }
-                    },
+                    .fillMaxWidth(),
                 state = scrollState,
                 flingBehavior = snapFlingBehavior,
                 contentPadding = PaddingValues(horizontal = this@BoxWithConstraints.maxWidth / 2 - itemWidth / 2)

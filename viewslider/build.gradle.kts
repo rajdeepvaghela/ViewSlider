@@ -1,61 +1,50 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinMultiplatformLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.vanniktech.mavenPublish)
     id("maven-publish")
 }
 
-android {
-    namespace = "com.rdapps.viewslider"
-    compileSdk = 34
+val libGroup = "io.github.rajdeepvaghela.viewslider"
+val libVersion = "2.0.1"
 
-    defaultConfig {
-        minSdk = 21
+kotlin {
+
+    android {
+        namespace = "com.rdapps.viewslider"
+        compileSdk = 36
+        minSdk = 23
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+    jvm()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    js { browser() }
+    wasmJs { browser() }
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.animation)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.ui)
+            implementation(libs.androidx.material.icons.extended)
         }
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-}
 
-dependencies {
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
+        }
 
-    implementation(libs.androidx.core.ktx)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
-    implementation(libs.compose.animation)
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.material3)
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            groupId = "com.rdapps"
-            artifactId = project.name
-            version = "1.0.0"
-
-            afterEvaluate {
-                from(components["release"])
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
