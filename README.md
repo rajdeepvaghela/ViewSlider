@@ -1,5 +1,5 @@
 # View Slider
-[![Release](https://img.shields.io/badge/Platform-ComposeMultiplatform-brightgreen.svg)](https://img.shields.io/badge/Platform-ComposeMultiplatform-brightgreen.svg)
+[![Release](https://img.shields.io/badge/Platform-ComposeMultiplatform-brightgreen.svg)](https://kotlinlang.org/compose-multiplatform)
 [![Release](https://img.shields.io/maven-central/v/io.github.rajdeepvaghela/viewslider)](https://img.shields.io/maven-central/v/io.github.rajdeepvaghela/viewslider)
 [![Release](https://img.shields.io/github/v/release/rajdeepvaghela/ViewSlider)](https://github.com/rajdeepvaghela/ViewSlider/releases)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
